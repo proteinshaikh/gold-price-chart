@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="payment-txn-receipt"
+              pageWidth="375"
+              pageHeight="857"
+              columnWidth="335"
+              topMargin="20"
+              bottomMargin="20"
+              uuid="01387d0f-9999-4bb6-a747-950f9f61d89e">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+
+    <!-- Field Definitions -->
+    <field name="transactionTimestamp"/>
+    <field name="txnRefNum"/>
+    <field name="amount"/>
+    <field name="currency"/>
+    <field name="debtorAccountTitle"/>
+    <field name="debtorAccountNumber"/>
+    <field name="creditorTitle"/>
+    <field name="creditorIdentifier"/>
+    <field name="creditorBankDisplayName"/>
+    <field name="modeOfPayment"/>
+    <field name="purposeOfPayment"/>
+    <field name="paymentNotes"/>
+
+    <!-- Background -->
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+
+    <!-- Title -->
+    <title>
+        <band height="101" splitType="Stretch">
+            <image>
+                <reportElement x="10" y="50" width="50" height="50" uuid="7576dc9e-56cb-4f21-8dfe-d80b03b21284"/>
+                <imageExpression><![CDATA["src/main/resources/logos/green-check-mark.png"]]></imageExpression>
+            </image>
+            <image>
+                <reportElement x="10" y="5" width="180" height="90" uuid="c1d094a9-af65-4e7b-9a30-89710515dce8"/>
+                <imageExpression><![CDATA["src/main/resources/logos/mashreq.png"]]></imageExpression>
+            </image>
+            <image>
+                <reportElement x="270" y="10" width="70" height="40" uuid="6b2fafab-8ed0-41ac-bfd0-e1dff983ee9f"/>
+                <imageExpression><![CDATA["src/main/resources/logos/e-receipt.png"]]></imageExpression>
+            </image>
+        </band>
+    </title>
+
+    <!-- Page Header -->
+    <pageHeader>
+        <band height="60" splitType="Stretch">
+            <textField pattern=" d MMM, yyyy">
+                <reportElement x="10" y="40" width="180" height="15" isRemoveLineWhenBlank="true" forecolor="#A6A6A6"
+                               uuid="be49670d-4275-4783-a9a8-db410a25991d"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="12" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{transactionTimestamp}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="10" y="10" width="200" height="30" forecolor="#313131"
+                               uuid="dc948665-f813-4dbc-bda4-16ceb8a1eb30"/>
+                <textElement verticalAlignment="Middle">
+                    <!-- Ensure that the text for "Payment details" is bold -->
+                    <font fontName="29LT Bukra" size="20" isBold="true" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Payment details]]></text>
+            </staticText>
+        </band>
+    </pageHeader>
+
+
+    <!-- Column Header -->
+    <columnHeader>
+        <band height="150" splitType="Stretch">
+            <staticText>
+                <reportElement x="10" y="10" width="180" height="24" forecolor="#7C7C7C"
+                               uuid="b5600c6c-495a-45b0-a620-38a5140646e6"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="12" isBold="false" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Reference number]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="10" y="34" width="290" height="19" isRemoveLineWhenBlank="true"
+                               uuid="386d1622-af40-41fc-935b-71e5aca6964c"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{txnRefNum}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="10" y="80" width="315" height="1" forecolor="#DDE0E9" uuid="a217b36e-5c94-4b7c-95fa-87873cb7a8ff"/>
+            </line>
+            <staticText>
+                <reportElement x="10" y="100" width="180" height="24" forecolor="#7C7C7C"
+                               uuid="b6178bd3-14b1-403b-88f8-e4a8d833ec71"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="12" isBold="false" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Amount]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="10" y="130" width="290" height="19" isRemoveLineWhenBlank="true"
+                               uuid="43079f61-95a8-4911-98d9-94997c8d6ece"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <!-- Concatenate currency and amount fields -->
+                <textFieldExpression><![CDATA[$F{currency} + " " + $F{amount}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </columnHeader>
+
+    <!-- Detail Section -->
+    <detail>
+        <band height="445" splitType="Stretch">
+
+            <!-- From Section -->
+            <staticText>
+                <reportElement x="10" y="20" width="180" height="24" forecolor="#7C7C7C"
+                               uuid="e81a45f1-8c55-46d8-b4d9-e56582f6c747"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="12" isBold="false" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[From]]></text>
+            </staticText>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="10" y="44" width="291" height="20" isRemoveLineWhenBlank="true"
+                               uuid="e9df4413-ff86-4b14-aabf-0a93fee43846"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{debtorAccountTitle}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="10" y="66" width="290" height="20" isRemoveLineWhenBlank="true"
+                               uuid="9fa79908-f858-42c9-bc7d-1126f11c4b9d"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{debtorAccountNumber}]]></textFieldExpression>
+            </textField>
+
+            <!-- To Section -->
+            <staticText>
+                <reportElement x="10" y="96" width="180" height="24" forecolor="#7C7C7C"
+                               uuid="919259b3-9757-4669-a1d1-56ebae39653e"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="12" isBold="false" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[To]]></text>
+            </staticText>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="10" y="120" width="289" height="20" isRemoveLineWhenBlank="true"
+                               uuid="0006a78a-3497-4b78-a264-b208a7acc9c0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{creditorTitle}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="10" y="142" width="289" height="20" isRemoveLineWhenBlank="true"
+                               uuid="0006a78a-3497-4b78-a264-b208a7acc9c0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{creditorIdentifier}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="10" y="164" width="289" height="20" isRemoveLineWhenBlank="true"
+                               uuid="0006a78a-3497-4b78-a264-b208a7acc9c0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{creditorBankDisplayName}]]></textFieldExpression>
+            </textField>
+
+            <!-- Mode of Payment Section -->
+            <staticText>
+                <reportElement x="10" y="196" width="180" height="24" isRemoveLineWhenBlank="true" forecolor="#7C7C7C"
+                               uuid="919259b3-9757-4669-a1d1-56ebae39653e">
+                    <printWhenExpression><![CDATA[$F{modeOfPayment} != null]]></printWhenExpression>
+                </reportElement>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="12" isBold="false" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Mode of payment]]></text>
+            </staticText>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="10" y="220" width="289" height="20" isRemoveLineWhenBlank="true"
+                               uuid="0006a78a-3497-4b78-a264-b208a7acc9c0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{modeOfPayment}]]></textFieldExpression>
+            </textField>
+
+            <!-- Purpose of Payment Section -->
+            <staticText>
+                <reportElement x="10" y="250" width="180" height="24" isRemoveLineWhenBlank="true" forecolor="#7C7C7C"
+                               uuid="919259b3-9757-4669-a1d1-56ebae39653e"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="12" isBold="false" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Purpose of payment]]></text>
+            </staticText>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="10" y="274" width="289" height="20" isRemoveLineWhenBlank="true"
+                               uuid="0006a78a-3497-4b78-a264-b208a7acc9c0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{purposeOfPayment}]]></textFieldExpression>
+            </textField>
+
+            <!-- Payment Notes Section -->
+            <staticText>
+                <reportElement x="10" y="300" width="180" height="24" isRemoveLineWhenBlank="true" forecolor="#7C7C7C"
+                               uuid="919259b3-9757-4669-a1d1-56ebae39653e"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="12" isBold="false" isItalic="false"/>
+                </textElement>
+                <text><![CDATA[Your message]]></text>
+            </staticText>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="10" y="324" width="289" height="20" isRemoveLineWhenBlank="true"
+                               uuid="0006a78a-3497-4b78-a264-b208a7acc9c0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="29LT Bukra" size="14" isBold="false" isItalic="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{paymentNotes}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+
+
+    <pageFooter>
+        <band height="54" splitType="Stretch">
+            <!-- Add a centered line to the footer with spacing on the left and right -->
+            <line>
+                <reportElement x="10" y="10" width="315" height="1" forecolor="#DDE0E9" uuid="a217b36e-5c94-4b7c-95fa-87873cb7a8ff"/>
+            </line>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
+
+
+</jasperReport>

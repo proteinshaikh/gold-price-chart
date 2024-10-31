@@ -1,0 +1,9 @@
+<fontFamilies>
+    <fontFamily name="29LT Bukra">
+        <normal>29lt-bukra.ttf</normal> <!-- Regular version -->
+        <!--bold>BukraBold.ttf</bold> <!- Bold version -->
+        <!--boldItalic>BukraBoldItalic.ttf</boldItalic> <!- Bold Italic version -->
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded>true</pdfEmbedded> <!-- Embeds font in PDFs (optional for images) -->
+    </fontFamily>
+</fontFamilies>
